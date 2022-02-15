@@ -13,13 +13,13 @@
 </svg>                SPEECH TO TEXT RECOGNITION
             </h1>
             <p style="color: darkslateblue">
-                Uses DeepSpeech and CMU Sphinx to transcribe data
+                Uses Coqui-ai to transcribe data
             </p>
         </div>
     </div>
 
     <div class="container">
-        <p style="color: grey;"><i>Note: Recording through web browser only uses deepspeech model</i></p>
+        <!--<p style="color: grey;"><i>Note: Recording through web browser only uses deepspeech model</i></p>-->
         <canvas id="analyser" style="width:100%;height:150px;background-color: darkslateblue" width="1024" height="500"></canvas>
         <p>
             <button id="start" class="btn btn-success" onclick="startRecording()" disabled>Record</button>
@@ -30,8 +30,8 @@
 <p>
             <form method="POST" action="http://localhost:5002/generate_transcript" enctype="multipart/form-data"  target="sub">
 
-            <input id="file" type="file" name="file">
-        <label>Choose a Model:</label>
+<!--            <input id="file" type="file" name="file">
+     <label>Choose a Model:</label>
 
 <select id="cars" name="method">
   <option value="deepspeech">DEEPSPEECH</option>
@@ -48,7 +48,7 @@
 <footer>
       <div class="container" style="align-content: center;text-align: center">
         <p> </p>
-      </div>
+      </div> -->
     </footer>
 
     <script src="{{ url_for('static', filename='recorder.js') }}"></script>

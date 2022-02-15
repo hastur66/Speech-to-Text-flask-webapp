@@ -49,7 +49,7 @@ def func(audio_file, transcript):
     """
     
     #dsSTT = Model('./ds_models061/output_graph.tflite')
-    dsSTT = Model('./stt_models/sinhala_model.tflite')
+    dsSTT = Model('./stt_models/eng_model.tflite')
     fs, audio = wav.read(audio_file)
     generated_words = dsSTT.stt(audio)
 
