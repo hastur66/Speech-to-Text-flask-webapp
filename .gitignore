@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+extra/*.png
+Files/*
+nltk_data/corpora/stopwords.zip
+nltk_data/*
+*.wav
+Procfile
+ds_models061/*
+stt_models/*

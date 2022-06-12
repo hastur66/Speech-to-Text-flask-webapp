@@ -2,8 +2,6 @@ import os, io, json
 from pydub.utils import mediainfo
 import subprocess
 
-##Author : Govardhan Chitrada
-##Last Modified on: 19/09/20
 
 def video_info(video_filepath):
     """ This function returns number of channels, bit rate, and sample rate of the video"""

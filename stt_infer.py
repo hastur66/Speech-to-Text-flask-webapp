@@ -1,4 +1,4 @@
-#import stt
+import stt
 from stt import Model
 import wave
 import scipy.io.wavfile as wav
@@ -13,45 +13,26 @@ nltk.data.path.append('./nltk_data')
 
 def func(audio_file, transcript):
     print(audio_file)
-    """model_file_path = 'ds_models061/output_graph.pbmm'
-    beam_width = 500
-    model = stt.Model(model_file_path, beam_width)
-    lm_file_path = 'ds_models061/lm.binary'
-    trie_file_path = 'ds_models061/trie'
-    lm_alpha = 0.75
-    lm_beta = 1.85
-    extended= 'extended'
-    model.enableDecoderWithLM(lm_file_path, trie_file_path, lm_alpha, lm_beta)
-
-    filename = audio_file
-    w = wave.open(filename, 'r')
-    rate = w.getframerate()
-    frames = w.getnframes()
-    buffer = w.readframes(frames)
-
-    ""
-    sample_rate, samples = wavfile.read(filename)
-    frequencies, times, spectrogram = signal.spectrogram(samples, sample_rate)
-    #plt.pcolormesh(times, frequencies, spectrogram)
-    #eplt.imshow(spectrogram)
-    plt.ylabel('Frequency [Hz]')
-    plt.xlabel('Time [sec]')
-    #plt.savefig('test.png') 
-    ""
-
-    data16 = np.frombuffer(buffer, dtype=np.int16)
-    #print(str(type(data16)))
-    print(rate)
-    text = model.stt(data16)
-    text1= model.sttWithMetadata(data16)
-    generated_words=words_from_metadata(text1)
-    #print(len(words_from_metadata(text1)),words_from_metadata(text1))
-    """
     
-    #dsSTT = Model('./ds_models061/output_graph.tflite')
-    dsSTT = Model('./stt_models/eng_model.tflite')
+    
+    dsSTT = Model('./stt_models/sinhala_model_v0.1.0.tflite')
+    #dsSTT = Model('./stt_models/eng_model.tflite')
+    
+    dsSTT.enableExternalScorer('./stt_models/Scorer/kenlm-medium-sinhala.scorer')
+    #dsSTT.enableExternalScorer('./stt_models/Scorer/huge-vocabulary.scorer')
+
+    #dsSTT.setBeamWidth(10)
+    #dsSTT.beamWidth()
+
+    #dsSTT.addHotWord()
+
     fs, audio = wav.read(audio_file)
     generated_words = dsSTT.stt(audio)
+
+    #dsSTT.sttWithMetadata(audio, 2)
+
+    #tra = stt.CandidateTranscript()
+    #print(tra.tokens())
 
     count_time,count_delay,total_words=0,0,0
     words_list=[]
@@ -80,8 +61,8 @@ def func(audio_file, transcript):
     #text = text + "<br><br>" + "<b>Total Recognised Words:</b>" + str(total_words) + '<br>' + '<b>Words Per Minute:</b>' + '<br>'+'<b>Total Filler Words:</b>'+str(total_filler_words)
 
     #print('total filler words:',total_filler_words)
-    #with open("Files/Transcript/output.txt", "w+") as f:
-    #    f.write(text)
+    with open("Files/Transcript/output.txt", "w+") as f:
+        f.write(generated_words)
     
     return(generated_words)
 
@@ -117,4 +98,3 @@ def words_from_metadata(metadata):
                 word_start_time = item.start_time
 
     return word_list
-##ddd
